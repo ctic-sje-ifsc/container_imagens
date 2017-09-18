@@ -22,8 +22,10 @@ pyOpenSSL==17.3.0
 requests==2.18.4
 rocket-errbot==1.2.5
 six==1.10.0
+slackclient==1.0.9
 urllib3==1.22
 waitress==1.0.2
 WebOb==1.7.3
+websocket-client==0.44.0
 WebTest==2.0.28
 Yapsy==1.11.223
