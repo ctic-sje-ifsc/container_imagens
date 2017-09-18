@@ -28,4 +28,4 @@ RUN chmod 0755 /docker-entrypoint.sh && \
 VOLUME ["/errbot"]
 WORKDIR ["/errbot"]
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["/usr/local/bin/errbot"]
+CMD ["/usr/local/bin/errbot", "-c", "/errbot/config.py"]
