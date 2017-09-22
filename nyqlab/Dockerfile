@@ -27,7 +27,7 @@ RUN chmod 0755 /docker-entrypoint.sh && \
     apt-get -y -q install curl gnupg apt-utils && \
     curl 'https://pgp.mit.edu/pks/lookup?op=get&search=0xE1F958385BFE2B6E' | apt-key add - && \
     apt-get update && \
-    apt-get -y -q install davfs2 sudo openssh-server x2go-keyring x2goserver x2goserver-xsession libglu1-mesa && \
+    apt-get -y -q install mount davfs2 sudo openssh-server x2go-keyring x2goserver x2goserver-xsession libglu1-mesa && \
     apt -y install git && \
     git clone --depth 1 https://github.com/rwnobrega/nyqlab && \
     apt -y install python3 python3-numpy python3-matplotlib python3-pyqt5 python3-scipy && \

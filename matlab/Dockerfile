@@ -25,7 +25,7 @@ RUN chmod 0755 /docker-entrypoint.sh && \
     apt-get -y -q upgrade && \
     echo 'deb http://packages.x2go.org/debian stretch main' >> /etc/apt/sources.list.d/x2go.list && \
     echo 'deb-src http://packages.x2go.org/debian stretch main' >> /etc/apt/sources.list.d/x2go.list && \
-    apt-get -y -q install curl davfs2 sudo gnupg apt-utils && \
+    apt-get -y -q install curl mount davfs2 sudo gnupg apt-utils && \
     curl 'https://pgp.mit.edu/pks/lookup?op=get&search=0xE1F958385BFE2B6E' | apt-key add - && \
     apt-get update && \
     apt-get -y -q install openssh-server x2go-keyring x2goserver x2goserver-xsession libglu1-mesa && \
