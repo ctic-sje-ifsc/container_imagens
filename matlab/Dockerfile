@@ -3,11 +3,11 @@
 # - https://github.com/theodotos/debian-ssh-docker
 
 FROM debian:stretch
-MAINTAINER Gabriel de Souza <souzagaabriel@gmail.com> e João Pedro Menegali Salvan Bitencourt <jpcatarinense@gmail.com>
 
 ARG BUILD_DATE
 ARG VCS_REF
-LABEL org.label-schema.build-date=$BUILD_DATE \
+LABEL maintainer="souzagaabriel@gmail.com" \
+      org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="CTIC-SJE-IFSC Kubernetes: MATLAB client" \
       org.label-schema.description="Nuvem privada do Câmpus São José do IFSC" \
       org.label-schema.license="MIT" \

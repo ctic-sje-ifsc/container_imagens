@@ -1,11 +1,11 @@
 # Baseado em https://github.com/mluis/docker-mosquitto-ws-alpine
 
 FROM alpine:3.6
-MAINTAINER Ederson Torresini <boidacarapreta@gmail.com>
 
 ARG BUILD_DATE
 ARG VCS_REF
-LABEL org.label-schema.build-date=$BUILD_DATE \
+LABEL maintainer="boidacarapreta@gmail.com" \
+      org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="CTIC-SJE-IFSC Kubernetes: Mosquitto MQTT broker" \
       org.label-schema.description="Nuvem privada do Câmpus São José do IFSC" \
       org.label-schema.license="epl-v10" \

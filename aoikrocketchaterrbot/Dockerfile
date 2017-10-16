@@ -1,10 +1,10 @@
 # Baseado em https://github.com/AoiKuiyuyou/AoikRocketChatErrbot
 FROM python:3.6
-MAINTAINER Ederson Torresini <boidacarapreta@gmail.com>
 
 ARG BUILD_DATE
 ARG VCS_REF
-LABEL org.label-schema.build-date=$BUILD_DATE \
+LABEL maintainer="boidacarapreta@gmail.com" \
+      org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="CTIC-SJE-IFSC Kubernetes: Errbot chatbot + AoikRocketChatErrbot plugin" \
       org.label-schema.description="Nuvem privada do Câmpus São José do IFSC" \
       org.label-schema.license="MIT" \
