@@ -19,6 +19,7 @@ dnspython3==1.15.0
 dnspython==1.15.0
 errbot==5.1.2
 idna==2.6
+jwt==0.5.2
 pyOpenSSL==17.3.0
 pycparser==2.18
 pygments-markdown-lexer==0.1.0.dev39
