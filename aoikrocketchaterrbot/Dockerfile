@@ -20,8 +20,6 @@ RUN chmod 0755 /docker-entrypoint.sh && \
     git clone https://github.com/AoiKuiyuyou/AoikRocketChatErrbot && \
     cd AoikRocketChatErrbot && \
     python setup.py install && \
-    # https://github.com/errbotio/err-backend-gitter/issues/30
-    sed -i 's/, threaded=threaded//g' /usr/local/lib/python3.6/site-packages/errbot-5.1.2-py3.6.egg/errbot/core.py && \
     groupadd errbot && \
     useradd -g errbot -d /AoikRocketChatErrbot -s /bin/false errbot && \
     chown -R errbot:errbot /AoikRocketChatErrbot && \
