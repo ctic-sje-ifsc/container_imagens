@@ -1,4 +1,4 @@
-FROM node:9.11
+FROM node:9
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -16,6 +16,9 @@ LABEL maintainer="boidacarapreta@gmail.com" \
 
 COPY ./docker-entrypoint.sh /
 RUN chmod 0755 /docker-entrypoint.sh && \
+    groupadd node && \
+    useradd -g node -d /home/node -m -s /bin/bash node && \
+    install -d -g node -o node -m 0700 /home/node/.ssh && \
     npm install -g -y react-native && \
     apt update && \
     apt install -y openssh-server && \
