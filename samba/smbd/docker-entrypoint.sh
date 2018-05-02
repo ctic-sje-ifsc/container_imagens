@@ -7,4 +7,4 @@ then
     smbpasswd -w ${PASSWD_LDAP}
 fi
 
-exec "$@"
+exec "$@" < /dev/null
