@@ -2,4 +2,4 @@
 
 set -e
 
-exec "$@"
+exec "$@" < /dev/null

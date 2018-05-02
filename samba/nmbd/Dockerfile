@@ -25,8 +25,6 @@ RUN chmod 0755 /docker-entrypoint.sh && \
 
 EXPOSE 137/udp
 EXPOSE 138/udp
-EXPOSE 139/tcp
-EXPOSE 445/tcp
 VOLUME ["/var/lib/samba", "/var/log/samba"]
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/usr/sbin/nmbd", "-F", "-S"]

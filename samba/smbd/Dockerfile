@@ -23,8 +23,6 @@ RUN chmod 0755 /docker-entrypoint.sh && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-EXPOSE 137/udp
-EXPOSE 138/udp
 EXPOSE 139/tcp
 EXPOSE 445/tcp
 VOLUME ["/var/lib/samba", "/var/log/samba"]
