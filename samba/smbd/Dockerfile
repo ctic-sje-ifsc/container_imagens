@@ -19,6 +19,7 @@ COPY ./docker-entrypoint.sh /
 RUN chmod 0755 /docker-entrypoint.sh && \
     apt update && \
     apt -y upgrade && \
+    apt -y install libnss-ldap libpam-ldap && \
     apt -y install samba smbldap-tools && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
