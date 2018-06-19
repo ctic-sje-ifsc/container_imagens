@@ -2,7 +2,7 @@
 # - https://docs.docker.com/engine/examples/running_ssh_service/
 # - https://github.com/theodotos/debian-ssh-docker
 
-FROM debian:stretch
+FROM node:6
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -19,20 +19,18 @@ LABEL maintainer="souzagaabriel@gmail.com" \
       org.label-schema.schema-version="1.0"
 
 ENV DEBIAN_FRONTEND noninteractive
+
+WORKDIR /usr/src/app
+
 COPY ./docker-entrypoint.sh /
+
 RUN chmod 0755 /docker-entrypoint.sh && \
-    apt-get update && \
-    apt-get -y -q upgrade && \
-    apt-get -y -q install curl sudo gnupg git && \
-    curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - && \
-    apt-get -y -q install nodejs && \
     git clone https://github.com/lucaslouca/video-conference-webrtc.git && \
     cd video-conference-webrtc && \
-    npm install && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    npm install
 
 EXPOSE 1337
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
-WORKDIR "/video-conference-webrtc"
-CMD ["node", "server.js"]
+
+CMD [ "npm", "start" ]
