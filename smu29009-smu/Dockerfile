@@ -1,7 +1,3 @@
-# Baseado em:
-# - https://docs.docker.com/engine/examples/running_ssh_service/
-# - https://github.com/theodotos/debian-ssh-docker
-
 FROM node:6
 
 ARG BUILD_DATE
@@ -17,8 +13,6 @@ LABEL maintainer="souzagaabriel@gmail.com" \
       org.label-schema.vendor="CTIC" \
       org.label-schema.version="4.0.3" \
       org.label-schema.schema-version="1.0"
-
-ENV DEBIAN_FRONTEND noninteractive
 
 WORKDIR /usr/src/app
 
