@@ -34,4 +34,5 @@ RUN chmod 0755 /docker-entrypoint.sh && \
 
 EXPOSE 1337
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["node", "video-conference-webrtc/server.js"]
+WORKDIR "/video-conference-webrtc"
+CMD ["node", "server.js"]
