@@ -30,7 +30,7 @@ RUN chmod 0755 /docker-entrypoint.sh && \
     cd video-conference-webrtc && \
     npm install && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 1337
 ENTRYPOINT ["/docker-entrypoint.sh"]
