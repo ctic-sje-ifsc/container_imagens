@@ -33,4 +33,6 @@ EXPOSE 1337
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
+WORKDIR /usr/src/app/video-conference-webrtc
+
 CMD [ "npm", "start" ]
