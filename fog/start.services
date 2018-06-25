@@ -1,0 +1,5 @@
+#!/bin/bash
+service mysql start
+service tftpd-hpa start
+service vsftpd start
+service php7.0-fpm start
