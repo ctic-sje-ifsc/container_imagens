@@ -32,7 +32,8 @@ RUN chmod 0755 /docker-entrypoint.sh && \
     apt -y install libnss-ldap libpam-ldap ldap-utils nscd && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-    mkdir -p /var/run/sshd
+    mkdir -p /var/run/sshd && \
+    install -d -g root -m 0700 -o root /root/.ssh
 
 EXPOSE 22
 ENTRYPOINT ["/docker-entrypoint.sh"]
