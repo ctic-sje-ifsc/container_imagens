@@ -28,7 +28,11 @@ RUN chmod 0755 /docker-entrypoint.sh && \
     apt -y install curl mount davfs2 fuse sudo gnupg apt-utils && \
     apt-key adv --keyserver keyserver.cais.rnp.br --receive-keys 0xe1f958385bfe2b6e && \
     apt update && \
+<<<<<<< HEAD
     apt -y install openssh-server x2go-keyring x2goserver x2goserver-xsession libglu1-mesa libasound2 && \
+=======
+    apt -y install openssh-server x2go-keyring x2goserver x2goserver-xsession libglu1-mesa && \
+>>>>>>> 9da21f4d7cd68125c1d4137349323e100c981f7b
     apt -y install libnss-ldap libpam-ldap ldap-utils nscd && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
