@@ -2,7 +2,7 @@
 # - https://docs.docker.com/engine/examples/running_ssh_service/
 # - https://github.com/theodotos/debian-ssh-docker
 
-FROM debian:stretch
+FROM debian:stable
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -21,18 +21,19 @@ LABEL maintainer="souzagaabriel@gmail.com" \
 ENV DEBIAN_FRONTEND noninteractive
 COPY ./docker-entrypoint.sh /
 RUN chmod 0755 /docker-entrypoint.sh && \
-    apt-get update && \
-    apt-get -y -q upgrade && \
-    echo 'deb http://packages.x2go.org/debian stretch main' >> /etc/apt/sources.list.d/x2go.list && \
-    echo 'deb-src http://packages.x2go.org/debian stretch main' >> /etc/apt/sources.list.d/x2go.list && \
-    apt-get -y -q install curl mount davfs2 fuse sudo gnupg apt-utils && \
-    curl 'https://pgp.mit.edu/pks/lookup?op=get&search=0xE1F958385BFE2B6E' | apt-key add - && \
-    apt-get update && \
-    apt-get -y -q install openssh-server x2go-keyring x2goserver x2goserver-xsession libglu1-mesa && \
-    apt-get -y -q install libnss-ldap libpam-ldap ldap-utils nscd && \
-    apt-get clean && \
+    apt update && \
+    apt -y upgrade && \
+    echo 'deb http://packages.x2go.org/debian stable main' >> /etc/apt/sources.list.d/x2go.list && \
+    echo 'deb-src http://packages.x2go.org/debian stable main' >> /etc/apt/sources.list.d/x2go.list && \
+    apt -y install curl mount davfs2 fuse sudo gnupg apt-utils && \
+    apt-key adv --keyserver keyserver.cais.rnp.br --receive-keys 0xe1f958385bfe2b6e && \
+    apt update && \
+    apt -y install openssh-server x2go-keyring x2goserver x2goserver-xsession libglu1-mesa libasound2 && \
+    apt -y install libnss-ldap libpam-ldap ldap-utils nscd && \
+    apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-    mkdir /var/run/sshd
+    mkdir -p /var/run/sshd && \
+    install -d -g root -m 0700 -o root /root/.ssh
 
 EXPOSE 22
 ENTRYPOINT ["/docker-entrypoint.sh"]
