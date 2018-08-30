@@ -1,7 +1,8 @@
 # Baseado em:
-# - https://github.com/cps-sei/swim/blob/master/docker/omnetpp-vnc/Dockerfile
+# - https://github.com/ryankurte/docker-omnetpp/blob/master/Dockerfile
+# - https://github.com/leszekbulawa/omnetpp-docker/blob/master/Dockerfile
 
-FROM cticsjeifsc/base_servicos_ensino_ctic
+FROM cticsjeifsc/base_ubuntu_servicos_ensino_ctic
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -17,10 +18,13 @@ LABEL maintainer="souzagaabriel@gmail.com" \
       org.label-schema.version="5.4.1" \
       org.label-schema.schema-version="1.0"
 
-RUN apt-get update
+COPY ./docker-entrypoint.sh /
+RUN chmod 0755 /docker-entrypoint.sh && \
+    apt-get update
 
 # General dependencies
 RUN apt-get install -y \
+    clang \
     git \
     wget \
     vim \
@@ -30,27 +34,38 @@ RUN apt-get install -y \
     bison \
     flex \
     perl \
+    python \
+    python3 \
     qt5-default \
-    tcl-dev \
+    libqt5opengl5-dev \
+    tcl-dev \ 
     tk-dev \
     libxml2-dev \
     zlib1g-dev \
     default-jre \
     doxygen \
     graphviz \
-    xvfb
+    xvfb \
+    libpcap-dev \
+    packagekit-gtk3-module \
+    libcanberra-gtk-module \
+    libatk-adaptor \ 
+    libgail-common
 
-# QT
+# QT4 components
 RUN apt-get install -y \
-    libopenscenegraph-dev \
+    libopenscenegraph-3.4-dev \
     openscenegraph-plugin-osgearth \
     libosgearth-dev \
     qt5-default \
     libxml2-dev \
     zlib1g-dev \
     default-jre \
-    libqt5opengl5-dev \
-    libwebkitgtk-3.0-0
+    libwebkitgtk-3.0-0 \
+    openmpi-bin \
+    libopenmpi-dev
+
+# OMNeT++ 5
 
 # Create working directory
 RUN mkdir -p /opt/omnetpp
@@ -58,19 +73,22 @@ WORKDIR /opt/omnetpp
 
 # Omnet++ source is already in repository. Copy it to container and unpack
 COPY omnetpp-5.4.1-src-linux.tgz /opt/omnetpp
-RUN tar xf omnetpp-5.4.1-src-linux.tgz
 
-WORKDIR /opt/omnetpp/omnetpp-5.4.1
+RUN tar -xf omnetpp-5.4.1-src-linux.tgz
 
-# Set path for compilation
+# Compilation requires path to be set
 ENV PATH $PATH:/opt/omnetpp/omnetpp-5.4.1/bin
 
-# Configure and compile Omnet++
-RUN xvfb-run ./configure WITH_OSG=no WITH_OSGEARTH=no && make
+# Configure and compile omnet++
+WORKDIR /opt/omnetpp/omnetpp-5.4.1
+RUN xvfb-run ./configure && \
+    make
 
 # Cleanup
 RUN apt-get clean && \
-    rm -rf /var/lib/apt && \
-rm /opt/omnetpp/omnetpp-5.4.1-src-linux.tgz
+  rm -rf /var/lib/apt && \
+  rm /opt/omnetpp/omnetpp-5.4.1-src-linux.tgz
 
-WORKDIR $HOME
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["/usr/sbin/sshd", "-D"]
+
