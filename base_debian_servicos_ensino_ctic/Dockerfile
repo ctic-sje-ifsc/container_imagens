@@ -26,7 +26,7 @@ RUN apt update && \
     apt -y install curl mount davfs2 fuse sudo gnupg apt-utils && \
     apt-key adv --recv-keys --keyserver keys.gnupg.net E1F958385BFE2B6E && \
     apt update && \
-    apt -y install openssh-server x2go-keyring x2goserver x2goserver-xsession && \
+    apt -y install openssh-server x2goserver x2goserver-xsession && \
     apt -y install libnss-ldap libpam-ldap ldap-utils nscd && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
