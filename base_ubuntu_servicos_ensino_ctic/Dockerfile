@@ -25,7 +25,7 @@ RUN apt update && \
     apt -y install curl mount davfs2 fuse sudo gnupg apt-utils && \
     add-apt-repository ppa:x2go/stable && \
     apt update && \
-    apt -y install openssh-server x2goserver x2goserver-xsession && \
+    apt -y install openssh-server x2goserver x2goserver-xsession xterm && \
     apt -y install libnss-ldap libpam-ldap ldap-utils nscd && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
