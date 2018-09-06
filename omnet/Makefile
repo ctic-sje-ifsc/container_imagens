@@ -1,6 +1,6 @@
 all: create
 
 create:
-	docker build -t cticsjeifsc/omnet:5.4.1 .
+	docker build -t cticsjeifsc/omnet .
 	docker login
-	docker push cticsjeifsc/omnet:5.4.1
+	docker push cticsjeifsc/omnet

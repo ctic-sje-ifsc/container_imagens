@@ -8,4 +8,7 @@ sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' 
 # Cria um link no /usr/local/bin
 ln -s /opt/MATLAB/R2015a/bin/matlab /usr/local/bin/matlab
 
+cat /mnt/passwd >> /etc/passwd
+cat /mnt/shadow >> /etc/shadow
+
 exec "$@"
