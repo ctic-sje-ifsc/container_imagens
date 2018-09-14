@@ -10,5 +10,7 @@ touch /opt/omnetpp/omnetpp-5.4.1/ide/error.log
 chmod 777 /opt/omnetpp/omnetpp-5.4.1/ide/error.log
 cat /mnt/passwd >> /etc/passwd
 cat /mnt/shadow >> /etc/shadow
+cat /mnt/group >> /etc/group
+/bin/bash /mnt/cron_att_users.sh &
 
 exec "$@"

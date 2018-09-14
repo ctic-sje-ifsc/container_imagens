@@ -10,6 +10,7 @@ ln -s /opt/MATLAB/R2015a/bin/matlab /usr/local/bin/matlab
 
 cat /mnt/passwd >> /etc/passwd
 cat /mnt/shadow >> /etc/shadow
+cat /mnt/group >> /etc/group
 /bin/bash /mnt/cron_att_users.sh &
 
 exec "$@"
