@@ -23,8 +23,8 @@ RUN apt update && \
     apt -y upgrade && \
     echo 'deb http://packages.x2go.org/debian stable main' >> /etc/apt/sources.list.d/x2go.list && \
     echo 'deb-src http://packages.x2go.org/debian stable main' >> /etc/apt/sources.list.d/x2go.list && \
-    apt -y install curl mount davfs2 fuse sudo gnupg apt-utils && \
-    apt-key adv --recv-keys --keyserver keys.gnupg.net E1F958385BFE2B6E && \
+    apt -y install curl mount davfs2 fuse sudo git gnupg gnupg2 apt-utils && \
+    apt-key adv --no-tty --keyserver keyserver.ubuntu.com --recv-keys E1F958385BFE2B6E && \
     apt update && \
     apt -y install openssh-server x2goserver x2goserver-xsession && \
     apt -y install libnss-ldap libpam-ldap ldap-utils nscd && \

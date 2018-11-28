@@ -22,7 +22,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt update && \
     apt -y upgrade && \
     apt -y install software-properties-common && \
-    apt -y install curl mount davfs2 fuse sudo gnupg apt-utils && \
+    apt -y install curl mount davfs2 fuse sudo gnupg git apt-utils && \
     add-apt-repository ppa:x2go/stable && \
     apt update && \
     apt -y install openssh-server x2goserver x2goserver-xsession xterm && \

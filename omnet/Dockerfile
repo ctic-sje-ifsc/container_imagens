@@ -31,6 +31,7 @@ RUN apt-get install -y \
     build-essential \
     gcc \
     g++ \
+    gdb \
     bison \
     flex \
     perl \

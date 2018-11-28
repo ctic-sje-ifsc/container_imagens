@@ -25,8 +25,8 @@ RUN chmod 0755 /docker-entrypoint.sh && \
     apt -y upgrade && \
     echo 'deb http://packages.x2go.org/debian stable main' >> /etc/apt/sources.list.d/x2go.list && \
     echo 'deb-src http://packages.x2go.org/debian stable main' >> /etc/apt/sources.list.d/x2go.list && \
-    apt -y install curl mount davfs2 fuse sudo gnupg apt-utils && \
-    apt-key adv --keyserver keyserver.cais.rnp.br --receive-keys 0xe1f958385bfe2b6e && \
+    apt -y install curl git mount davfs2 fuse sudo gnupg apt-utils && \
+    apt-key adv --no-tty --keyserver keyserver.cais.rnp.br --receive-keys 0xe1f958385bfe2b6e && \
     apt update && \
     apt -y install openssh-server x2go-keyring x2goserver x2goserver-xsession libglu1-mesa libasound2 libdbus-glib-1-2 && \
     apt -y install libgstreamer1.0-0 gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-doc gstreamer1.0-tools && \
