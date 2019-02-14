@@ -1,7 +1,7 @@
 # Dockerfile for building fogproject server image for Debian 9 (stretch), with all additional software needed.
 #
 # Version  0.1
-FROM debian:stretch-slim
+FROM debian:stretch
 
 MAINTAINER Ricardo Martins <ricardo.ifsc@gmail.com>
 
@@ -16,9 +16,7 @@ RUN apt update && \
     chmod 0755 /etc/init.d/start.services && \
     git -C /opt clone https://github.com/fogproject/fogproject.git Install_fog && \
     cd /opt/Install_fog/bin ; sh -c '/bin/echo -e "\nNormal\n191.36.8.25\nY\nbond0\nN\nN\nN\nN\nY\n\n\n" | /bin/bash installfog.sh' && \
-    /bin/rm -rf /opt/Install_fog && \
-    wget -O - https://fogproject.org/kernels/Kernel.TomElliott.4.15.2.64 > /var/www/fog/service/ipxe/bzImage && \
-    wget -O - https://fogproject.org/kernels/Kernel.TomElliott.4.15.2.32 > /var/www/fog/service/ipxe/bzImage32
+    /bin/rm -rf /opt/Install_fog
 
 EXPOSE 21 111 2049 8083 44383 69/udp
 
