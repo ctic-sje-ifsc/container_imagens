@@ -26,6 +26,7 @@ RUN chmod 0755 /docker-entrypoint.sh && \
 RUN apt-get install -y \
     clang \
     git \
+    gedit \
     wget \
     vim \
     build-essential \
@@ -61,12 +62,16 @@ RUN apt-get install -y \
     qt5-default \
     libxml2-dev \
     zlib1g-dev \
-    default-jre \
+    openjdk-8-jre \
+#    default-jre \
     libwebkitgtk-3.0-0 \
     openmpi-bin \
     libopenmpi-dev
 
 # OMNeT++ 5
+
+# Define versao do Java
+RUN update-java-alternatives -s java-1.8.0-openjdk-amd64
 
 # Create working directory
 RUN mkdir -p /opt/omnetpp
