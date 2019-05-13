@@ -32,7 +32,7 @@ RUN chmod 0755 /docker-entrypoint.sh && \
     wget -q -O /tmp/libpng12.deb http://mirrors.kernel.org/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1_i386.deb && \
     dpkg -i /tmp/libpng12.deb && \
     rm /tmp/libpng12.deb && \
-    apt-get install -y cadaver && \       
+    apt-get install -y cadaver owncloud-client-cmd && \       
     apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
