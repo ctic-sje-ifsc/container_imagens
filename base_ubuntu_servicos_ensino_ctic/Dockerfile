@@ -2,7 +2,7 @@
 # - https://docs.docker.com/engine/examples/running_ssh_service/
 # - https://github.com/theodotos/debian-ssh-docker
 
-FROM ubuntu:latest
+FROM ubuntu:18.04
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -22,7 +22,8 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt update && \
     apt -y upgrade && \
     apt -y install software-properties-common && \
-    apt -y install curl mount davfs2 fuse sudo gnupg git apt-utils && \
+    #apt -y install curl mount libneon27 davfs2 fuse sudo gnupg git apt-utils && \
+    apt -y install curl mount libneon27=0.30.2-2build1 davfs2 fuse sudo gnupg git apt-utils && \
     add-apt-repository ppa:x2go/stable && \
     apt update && \
     apt -y install openssh-server x2goserver x2goserver-xsession xterm && \
