@@ -1,39 +1,32 @@
-FROM debian:jessie
-
-ARG BUILD_DATE
-ARG VCS_REF
-LABEL maintainer="souzagaabriel@gmail.com" \
-      org.label-schema.build-date=$BUILD_DATE \
-      org.label-schema.name="CTIC-SJE-IFSC Kubernetes: Eagle" \
-      org.label-schema.description="Nuvem privada do Câmpus São José do IFSC" \
-      org.label-schema.license="MIT" \
-      org.label-schema.url="https://projetos.sj.ifsc.edu.br" \
-      org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.vcs-url="https://github.com/ctic-sje-ifsc/servicos_kubernetes" \
-      org.label-schema.vendor="CTIC"
+FROM cticsjeifsc/base_ubuntu_servicos_ensino_ctic
+# Baseado https://github.com/nickandrew/docker-eagle (Nick Andrew <nick@nick-andrew.net>)
 
 COPY ./docker-entrypoint.sh /
-RUN chmod 0755 /docker-entrypoint.sh && \
-    echo 'deb http://ftp.de.debian.org/debian jessie main non-free' >> /etc/apt/sources.list.d/nonfree.list && \
-    apt-get update && \
-    apt -y upgrade && \
-    dpkg --add-architecture i386 && \
-    apt-get update && \
-    apt -y install eagle gedit
+RUN chmod 0755 /docker-entrypoint.sh 
 
-RUN echo 'deb http://packages.x2go.org/debian stable main' >> /etc/apt/sources.list.d/x2go.list && \
-    echo 'deb-src http://packages.x2go.org/debian stable main' >> /etc/apt/sources.list.d/x2go.list && \
-    apt -y install curl mount fuse sudo git gnupg gnupg2 apt-utils && \
-    apt-key adv --no-tty --keyserver keyserver.ubuntu.com --recv-keys E1F958385BFE2B6E && \
-    apt update && \
-    apt -y install openssh-server x2goserver x2goserver-xsession && \
-    apt -y install libnss-ldap libpam-ldap ldap-utils nscd && \
-    #apt clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-    mkdir -p /var/run/sshd && \
-    install -d -g root -m 0700 -o root /root/.ssh
+RUN apt-get update && apt-get -y upgrade
+
+RUN apt-get -y install wget bzip2
+
+# Do this early, to cache the huge binary download
+RUN wget -q -O /tmp/eagle.tar.gz https://trial2.autodesk.com/NET17SWDLD/2017/EGLPRM/ESD/Autodesk_EAGLE_9.5.0_English_Linux_64bit.tar.gz
+
+# Install particular eagle dependencies
+RUN apt-get -y install libnspr4 libglib2.0-0 libnss3 libasound2
+
+RUN apt-get -y install libcups2
+RUN apt-get -y install man-db
+RUN mkdir -p /opt/eagle-9.5.0
+
+# ------------------------------------------------------------------------
+# Everything under here, run as user 'user'
+# ------------------------------------------------------------------------
+
+WORKDIR /opt
+
+RUN tar zxpf /tmp/eagle.tar.gz
+RUN rm /tmp/eagle.tar.gz
 
 EXPOSE 22
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/usr/sbin/sshd", "-D"]
-
