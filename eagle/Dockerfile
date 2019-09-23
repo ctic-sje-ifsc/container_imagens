@@ -15,9 +15,10 @@ RUN wget -q -O /tmp/eagle.tar.gz https://trial2.autodesk.com/NET17SWDLD/2017/EGL
 RUN apt-get -y install libnspr4 libglib2.0-0 libnss3 libasound2
 
 RUN apt-get -y install libcups2
-RUN apt-get -y install man-db
+RUN apt-get -y install man-db locales
 RUN mkdir -p /opt/eagle-9.5.0
 
+RUN locale-gen pt_BR pt_BR.UTF-8 en_US en_US.UTF-8
 # ------------------------------------------------------------------------
 # Everything under here, run as user 'user'
 # ------------------------------------------------------------------------
