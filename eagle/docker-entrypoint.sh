@@ -2,6 +2,9 @@
 
 set -e
 
+#PATH
+echo "PATH=$PATH:/opt/eagle-9.5.0" >> /etc/environment
+
 cat /mnt/passwd >> /etc/passwd
 cat /mnt/shadow >> /etc/shadow
 cat /mnt/group >> /etc/group
