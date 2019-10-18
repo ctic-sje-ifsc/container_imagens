@@ -1,6 +1,6 @@
 all: create
 
 create:
-	docker build -t 85humberto/moodle:1.0.12 .
+	docker build -t cticsjeifsc/moodle:1.0.13 .
 	docker login
-	docker push 85humberto/moodle:1.0.12
+	docker push cticsjeifsc/moodle:1.0.13
