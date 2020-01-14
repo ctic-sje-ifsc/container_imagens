@@ -1,4 +1,4 @@
-FROM bitnami/moodle:3.8.0-debian-9-r0
+FROM bitnami/moodle:3.8.1-debian-9-r0
 LABEL maintainer "IFSC SJE"
 
 RUN install_packages autoconf build-essential autoconf pkg-config zlib1g-dev libmemcached-dev
