@@ -15,3 +15,6 @@ RUN rm /usr/local/etc/php/php.ini-development; mv /usr/local/etc/php/php.ini-pro
 
 RUN sed -i -r '/post_max_size/c\post_max_size = 32M' /usr/local/etc/php/php.ini && \
     sed -i -r '/upload_max_filesize/c\upload_max_filesize = 32M' /usr/local/etc/php/php.ini
+
+ # Adicionado para resolver links da wiki antiga.
+RUN ln -s /var/www/html /var/www/html/wiki
