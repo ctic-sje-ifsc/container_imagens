@@ -1,4 +1,4 @@
-FROM mediawiki:lts
+FROM mediawiki:1.31.6
 
 ARG DEBIAN_FRONTEND=noninteractive
 

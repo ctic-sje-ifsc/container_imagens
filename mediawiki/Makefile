@@ -1,6 +1,6 @@
 all: create
 
 create:
-	docker build -t cticsjeifsc/mediawiki:latest .
+	docker build -t cticsjeifsc/mediawiki:1.31.6 .
 	docker login
-	docker push cticsjeifsc/mediawiki:latest
+	docker push cticsjeifsc/mediawiki:1.31.6
