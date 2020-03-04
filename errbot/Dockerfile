@@ -26,7 +26,7 @@ RUN chmod 0755 /docker-entrypoint.sh && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 VOLUME ["/errbot"]
-WORKDIR "/errbot"
+WORKDIR /errbot
 USER "errbot"
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/usr/local/bin/errbot"]
