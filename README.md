@@ -1,2 +1,3 @@
-# imagens
-Imagens de contêiner usados nas aplicações do IFSC câmpus São José.
+# Imagens de Contêineres
+
+Documentação: https://ctic.sj.ifsc.edu.br/container_imagens.html.
