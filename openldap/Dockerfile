@@ -22,7 +22,7 @@ RUN chmod 0755 /docker-entrypoint.sh && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
 EXPOSE 1024
-VOLUME ["/etc/openldap", "/var/lib/openldap"]
+VOLUME ["/var/lib/openldap"]
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/usr/sbin/slapd", "-d", "160", "-h", "ldap://0.0.0.0:1024"]
 
