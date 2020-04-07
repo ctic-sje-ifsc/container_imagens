@@ -20,5 +20,6 @@ RUN chmod 0755 /docker-entrypoint.sh && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
 EXPOSE 53/UDP
+EXPOSE 53/TCP
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/usr/sbin/named", "-4", "-g", "-u", "named"]
