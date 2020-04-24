@@ -16,7 +16,7 @@ LABEL maintainer="ctic.sje@listas.sj.ifsc.edu.br" \
 
 COPY ./docker-entrypoint.sh /
 RUN chmod 0755 /docker-entrypoint.sh && \
-    apk add --update openldap openldap-back-mdb && \
+    apk add --update openldap openldap-back-mdb openldap-overlay-syncprov openldap-back-monitor openldap-back-ldap && \
     mkdir -p /run/openldap && \
     chown ldap /run/openldap && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
