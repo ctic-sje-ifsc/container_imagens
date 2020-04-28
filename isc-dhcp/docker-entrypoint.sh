@@ -2,4 +2,9 @@
 
 set -e
 
-exec "$@"
+if [ ${INTERFACE} == "" ]
+then
+    INTERFACE="eth0"
+fi
+
+exec "$@" ${INTERFACE}
