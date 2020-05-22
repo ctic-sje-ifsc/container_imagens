@@ -1,34 +1,24 @@
 FROM alpine:latest
-#
-# BUILD:
-#   wget https://raw.githubusercontent.com/thbe/docker-cups/master/Dockerfile
-#   docker build --rm --no-cache -t thbe/cups .
-#
-# USAGE:
-#   wget https://raw.githubusercontent.com/thbe/docker-cups/master/start_cups.sh
-#   ./start_cups.sh
-#
 
-# Set metadata
-LABEL maintainer="Ricardo Martins <ricardo.ifsc@gmail.com>"
-LABEL version="2.0"
+ARG BUILD_DATE
+ARG VCS_REF
+LABEL maintainer="ctic.sje@listas.sj.ifsc.edu.br" \
+    org.label-schema.build-date=$BUILD_DATE \
+    org.label-schema.name="CTIC-SJE-IFSC Kubernetes: CUPS server" \
+    org.label-schema.description="Nuvem privada do Câmpus São José do IFSC" \
+    org.label-schema.license="MIT" \
+    org.label-schema.url="https://projetos.sj.ifsc.edu.br" \
+    org.label-schema.vcs-ref=$VCS_REF \
+    org.label-schema.vcs-url="https://github.com/ctic-sje-ifsc/servicos_kubernetes" \
+    org.label-schema.vendor="CTIC" \
+    org.label-schema.version="2.3.3-r0" \
+    org.label-schema.schema-version="1.0"
 
-# Set environment
-ENV LANG pt_BR.UTF-8
-ENV TERM xterm
-
-# Copy configuration files
-COPY cupsd.conf /etc/cups/cupsd.conf
-COPY printers.conf /etc/cups/printers.conf
-COPY ppd /etc/cups/ppd/
-COPY kyofilter_B /usr/lib/cups/filter/kyofilter_B
 COPY ./docker-entrypoint.sh /
-
 RUN chmod 0755 /docker-entrypoint.sh && \
- apk update --no-cache && apk add --no-cache cups cups-filters procps ghostscript
+    apk add --update cups cups-filters procps ghostscript && \
+    rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
-EXPOSE 631 137/udp 139/tcp 445/tcp
-
+EXPOSE 631/udp
 ENTRYPOINT ["/docker-entrypoint.sh"]
-
 CMD ["/usr/sbin/cupsd", "-f"]
