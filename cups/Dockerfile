@@ -19,6 +19,6 @@ RUN chmod 0755 /docker-entrypoint.sh && \
     apk add --update cups cups-filters procps ghostscript && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
-EXPOSE 631/udp
+EXPOSE 631/TCP
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/usr/sbin/cupsd", "-f"]
