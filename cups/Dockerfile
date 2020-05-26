@@ -15,7 +15,9 @@ LABEL maintainer="ctic.sje@listas.sj.ifsc.edu.br" \
     org.label-schema.schema-version="1.0"
 
 COPY ./docker-entrypoint.sh /
+COPY ./kyofilter_B /usr/lib/cups/filter/
 RUN chmod 0755 /docker-entrypoint.sh && \
+    chmod 0755 /usr/lib/cups/filter/kyofilter_B && \
     apk add --update cups cups-filters procps ghostscript && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
