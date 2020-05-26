@@ -18,7 +18,7 @@ COPY ./docker-entrypoint.sh /
 COPY ./kyofilter_B /usr/lib/cups/filter/
 RUN chmod 0755 /docker-entrypoint.sh && \
     chmod 0755 /usr/lib/cups/filter/kyofilter_B && \
-    apk add --update cups cups-filters procps ghostscript && \
+    apk add --update openldap-clients cups cups-filters procps ghostscript && \
     rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
 
 EXPOSE 631/TCP
