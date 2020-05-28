@@ -24,4 +24,4 @@ RUN chmod 0755 /docker-entrypoint.sh && \
 EXPOSE 67/UDP
 EXPOSE 67/TCP
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["/usr/sbin/dhcpd", "-4", "-f", "-d", "-user", "dhcp", "-group", "dhcp"]
+CMD ["/usr/sbin/dhcpd", "-4", "-f", "-d"]
