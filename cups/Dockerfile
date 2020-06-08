@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM debian:buster-slim
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -11,15 +11,19 @@ LABEL maintainer="ctic.sje@listas.sj.ifsc.edu.br" \
     org.label-schema.vcs-ref=$VCS_REF \
     org.label-schema.vcs-url="https://github.com/ctic-sje-ifsc/servicos_kubernetes" \
     org.label-schema.vendor="CTIC" \
-    org.label-schema.version="2.3.3-r0" \
+    org.label-schema.version="2.2.10-6+deb10u3" \
     org.label-schema.schema-version="1.0"
 
+ENV DEBIAN_FRONTEND noninteractive
 COPY ./docker-entrypoint.sh /
-COPY ./kyofilter_B /usr/lib/cups/filter/
 RUN chmod 0755 /docker-entrypoint.sh && \
-    chmod 0755 /usr/lib/cups/filter/kyofilter_B && \
-    apk add --update openldap-clients cups cups-filters procps ghostscript && \
-    rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
+    apt update && \
+    apt -y upgrade && \
+    apt -y install cups && \
+    apt clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+COPY ./kyofilter_B /usr/lib/cups/filter/
+RUN chmod 0755 /usr/lib/cups/filter/kyofilter_B
 
 EXPOSE 631/TCP
 ENTRYPOINT ["/docker-entrypoint.sh"]
