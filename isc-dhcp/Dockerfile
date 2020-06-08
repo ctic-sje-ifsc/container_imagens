@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM debian:buster-slim
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -11,17 +11,17 @@ LABEL maintainer="ctic.sje@listas.sj.ifsc.edu.br" \
     org.label-schema.vcs-ref=$VCS_REF \
     org.label-schema.vcs-url="https://github.com/ctic-sje-ifsc/servicos_kubernetes" \
     org.label-schema.vendor="CTIC" \
-    org.label-schema.version="4.4.2" \
+    org.label-schema.version="4.4.1" \
     org.label-schema.schema-version="1.0"
 
-COPY ./docker-entrypoint.sh /
-RUN chmod 0755 /docker-entrypoint.sh && \
-    apk add --update dhcp && \
-    touch /var/lib/dhcp/dhcpd.leases && \
-    chown dhcp:dhcp /var/lib/dhcp/dhcpd.leases && \
-    rm -rf /tmp/* /var/tmp/* /var/cache/apk/*
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt update && \
+    apt -y upgrade && \
+    apt -y install isc-dhcp-server && \
+    apt clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 67/UDP
 EXPOSE 67/TCP
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["/usr/sbin/dhcpd", "-4", "-f", "-d", "-user", "dhcp", "-group", "dhcp"]
+CMD ["/usr/sbin/dhcpd", "-4", "-d"]
