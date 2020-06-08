@@ -15,7 +15,9 @@ LABEL maintainer="ctic.sje@listas.sj.ifsc.edu.br" \
     org.label-schema.schema-version="1.0"
 
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt update && \
+COPY ./docker-entrypoint.sh /
+RUN chmod 0755 /docker-entrypoint.sh && \
+    apt update && \
     apt -y upgrade && \
     apt -y install isc-dhcp-server && \
     apt clean && \
