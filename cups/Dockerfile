@@ -22,8 +22,6 @@ RUN chmod 0755 /docker-entrypoint.sh && \
     apt -y install cups && \
     apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-COPY ./kyofilter_B /usr/lib/cups/filter/
-RUN chmod 0755 /usr/lib/cups/filter/kyofilter_B
 
 EXPOSE 631/TCP
 ENTRYPOINT ["/docker-entrypoint.sh"]
