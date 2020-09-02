@@ -24,7 +24,7 @@ RUN apt update && \
     apt install libzip-dev libpng-dev libicu-dev libxml2-dev -y && \
     docker-php-ext-install gd intl mysqli opcache soap xmlrpc zip
 
-RUN apt-get install libldap2-dev -y && \
+RUN apt-get install unzip libldap2-dev -y && \
     docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu && \
     docker-php-ext-install ldap && \
     apt purge libzip-dev libpng-dev libicu-dev libxml2-dev libldap2-dev -y && \
@@ -35,5 +35,10 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
     echo 'extension=redis.so' >> "$PHP_INI_DIR/php.ini" && \
     sed -i -r '/post_max_size/c\post_max_size = 64M' "$PHP_INI_DIR/php.ini" && \
     sed -i -r '/upload_max_filesize/c\upload_max_filesize = 64M' "$PHP_INI_DIR/php.ini"
+
+RUN curl https://moodle.org/plugins/download.php/22150/mod_vpl_moodle39_2020080218.zip --output mod_vpl_moodle39.zip && \
+    unzip mod_vpl_moodle39.zip -d /var/www/html/mod && \
+    rm mod_vpl_moodle39.zip && \
+    chown -R www-data:www-data /var/www/
 
 EXPOSE 80/TCP
