@@ -1,0 +1,19 @@
+name: Docker Image CI
+
+on:
+  schedule:
+  - cron: "0 13 * * *"
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag cticsjeifsc/moodle:3.9
+
+    - name: Push image
+      run: docker push cticsjeifsc/moodle:3.9
