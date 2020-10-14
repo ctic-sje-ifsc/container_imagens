@@ -21,10 +21,8 @@ RUN curl https://download.moodle.org/download.php/direct/stable39/moodle-latest-
     chown -R www-data:www-data /var/www/
 
 RUN apt update && \
-    apt install libzip-dev libpng-dev libicu-dev libxml2-dev -y && \
-    docker-php-ext-install gd intl mysqli opcache soap xmlrpc zip
-
-RUN apt-get install unzip libldap2-dev -y && \
+    apt install libzip-dev libpng-dev libicu-dev libxml2-dev unzip libldap2-dev -y && \
+    docker-php-ext-install gd intl mysqli opcache soap xmlrpc zip && \
     docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu && \
     docker-php-ext-install ldap && \
     apt purge libzip-dev libpng-dev libicu-dev libxml2-dev libldap2-dev -y && \
