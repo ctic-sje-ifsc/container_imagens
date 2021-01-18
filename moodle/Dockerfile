@@ -14,7 +14,7 @@ LABEL maintainer="ctic.sje@listas.ifsc.edu.br" \
     org.label-schema.version="3.9" \
     org.label-schema.schema-version="1.0"
 
-RUN curl https://download.moodle.org/download.php/direct/stable39/moodle-latest-39.tgz --output moodle.tgz && \
+RUN curl https://download.moodle.org/download.php/direct/stable39/moodle-3.9.4.tgz --output moodle.tgz && \
     tar zxf moodle.tgz --strip-components=1 && \
     rm moodle.tgz && \
     mkdir /var/www/moodledata && \
