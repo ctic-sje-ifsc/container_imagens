@@ -4,9 +4,9 @@ set -e
 
 echo "export PATH=$PATH:/opt/altera/13.0sp1/quartus/bin" >> /etc/bash.bashrc
 
-echo "export LICENSE_FILE=1800@vm-lan2.sj.ifsc.edu.br" >> /etc/bash.bashrc
-echo "export LM_LICENSE_FILE=1800@vm-lan2.sj.ifsc.edu.br" >> /etc/bash.bashrc
-echo "export MGLS_LICENSE_FILE=1800@vm-lan2.sj.ifsc.edu.br" >> /etc/bash.bashrc
+echo "export LICENSE_FILE=1800@license-server.sj.ifsc.edu.br" >> /etc/bash.bashrc
+echo "export LM_LICENSE_FILE=1800@license-server.sj.ifsc.edu.br" >> /etc/bash.bashrc
+echo "export MGLS_LICENSE_FILE=1800@license-server.sj.ifsc.edu.br" >> /etc/bash.bashrc
 
 echo "export LD_LIBRARY_PATH=/opt/altera/13.0sp1/lib32" >> /etc/bash.bashrc
 
