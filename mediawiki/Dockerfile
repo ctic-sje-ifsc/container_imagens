@@ -1,4 +1,4 @@
-FROM mediawiki:1.31.10
+FROM mediawiki:1.31.12
 
 ARG BUILD_DATE
 ARG VCS_REF
@@ -11,7 +11,7 @@ LABEL maintainer="ctic.sje@listas.ifsc.edu.br" \
     org.label-schema.vcs-ref=$VCS_REF \
     org.label-schema.vcs-url="https://github.com/ctic-sje-ifsc/servicos_kubernetes" \
     org.label-schema.vendor="CTIC" \
-    org.label-schema.version="1.31.10" \
+    org.label-schema.version="1.31.12" \
     org.label-schema.schema-version="1.0"
 
 ARG DEBIAN_FRONTEND=noninteractive
