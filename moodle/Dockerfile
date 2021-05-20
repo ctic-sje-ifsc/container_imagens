@@ -34,7 +34,7 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini" && \
     sed -i -r '/post_max_size/c\post_max_size = 64M' "$PHP_INI_DIR/php.ini" && \
     sed -i -r '/upload_max_filesize/c\upload_max_filesize = 64M' "$PHP_INI_DIR/php.ini"
 
-RUN curl https://moodle.org/plugins/download.php/22150/mod_vpl_moodle39_2020080218.zip --output mod_vpl_moodle39.zip && \
+RUN curl https://moodle.org/plugins/download.php/23807/mod_vpl_moodle310_2021033113.zip --output mod_vpl_moodle39.zip && \
     unzip mod_vpl_moodle39.zip -d /var/www/html/mod && \
     rm mod_vpl_moodle39.zip && \
     chown -R www-data:www-data /var/www/
