@@ -1,0 +1,255 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <center><img src="IFSC.png" width=600 height=160></center>
+   <title>Calculadora Tráfego de Voz em Rádio Digital</title
+   
+   <br>
+
+   <center><h3>Calculadora de Grandezas de Rádio Digital Por Voz</h3></center>
+
+   <meta charset="UTF-8">
+
+
+</head>
+
+<style type="text/css">
+<!--
+
+form fieldset {
+   margin: 10px auto 10px auto;
+   width: 40%;
+   border: solid green 1px;
+   padding: 3%;
+}
+
+form legend {
+   padding: 6px;
+   margin: 10px;
+   border: solid black 1px;
+   font-size: 100%;
+   font-weight: bold;
+   background-color: #e8e8e8;
+}
+
+form label {
+   display: block;
+   font-size: 11px;
+}
+
+form input {
+   width: 100%;
+   border: solid #ccc 1px;
+   font-size: 11px;
+   margin-bottom: 10px;
+}
+
+form input.botao {
+   display: block;
+   width: auto;
+   float: right;
+}
+-->
+</style>
+
+
+<form name="calcform" method="post" action="">
+   <fieldset>
+      <legend><strong>Probabilidade de Bloqueio: Erlang B</strong></legend>
+
+      <label for="A">Tráfego Médio:</label>
+      <input type="text" name="A" id="A" />
+
+      <label for="N">Número de Canais:</label>
+      <input type="text" name="N" id="N" />
+
+      <label for="res">Resultado:</label>
+      <input type="text" name="res" id="res" />
+
+      <input type="button" value="Calcular" class="botao" onClick="erlangB(document.calcform.value)"/>
+   </fieldset>
+
+   <br>
+
+   <fieldset>
+      <legend><strong>Probabilidade de Bloqueio: Erlang C</strong></legend>
+
+      <label for="A1">Trafego Médio:</label>
+      <input type="text" name="A1" id="A1" />
+
+      <label for="N1">Número de Canais:</label>
+      <input type="text" name="N1" id="N1" />
+  
+      <label for="res">Resultado:</label>
+      <input type="text" name="res1" id="res1" />
+
+      <input type="button" value="Calcular" class="botao" onClick="erlangC(document.calcform.value)"/>
+   </fieldset>
+
+   <br>
+
+   <fieldset>
+      <legend><strong>Tráfego Médio Por Usuário</strong></legend>
+
+      <label for="lambda">Número de Chamadas:</label>
+      <input type="text" name="lambda" id="lambda" />
+
+      <label for="H">Duração Média das Chamadas:</label>
+      <input type="text" name="H" id="H" />
+  
+      <label for="res2">Resultado:</label>
+      <input type="text" name="res2" id="res2" />
+
+      <input type="button" value="Calcular" class="botao" onClick="trafegoUser(document.calcform.value)"/>
+   </fieldset>
+
+   <br>
+
+   <fieldset>
+      <legend><strong>Tráfego Médio Por Canal</strong></legend>
+
+      <label for="Au">Tráfego Médio Por Usuário:</label>
+      <input type="text" name="Au" id="Au" />
+
+      <label for="N2">Número de Canais:</label>
+      <input type="text" name="N2" id="N2" />
+
+      <label for="U">Número de Usuários:</label>
+      <input type="text" name="U" id="U" />
+  
+      <label for="res3">Resultado:</label>
+      <input type="text" name="res3" id="res3" />
+
+      <input type="button" value="Calcular" class="botao" onClick="trafegoCanal(document.calcform.value)"/>
+   </fieldset>
+
+   <br>
+
+   <fieldset>
+      <legend><strong>Duração Média Da Chamada</strong></legend>
+
+      <label for="Au1">Tráfego Médio Por Usuário:</label>
+      <input type="text" name="Au1" id="Au1" />
+
+      <label for="lambda1">Número de Chamadas:</label>
+      <input type="text" name="lambda1" id="lambda1" />
+  
+      <label for="res4">Resultado:</label>
+      <input type="text" name="res4" id="res4" />
+
+      <input type="button" value="Calcular" class="botao" onClick="duracaoChamada(document.calcform.value)"/>
+   </fieldset>
+
+   <br>
+
+   <fieldset>
+      <legend><strong>Atraso Médio</strong></legend>
+
+      <label for="Pb">Probabilidade de Atraso > 0:</label>
+      <input type="text" name="Pb" id="Pb" />
+
+      <label for="H1">Duração Média da Chamada:</label>
+      <input type="text" name="H1" id="H1" />
+
+      <label for="N4">Número de Canais:</label>
+      <input type="text" name="N4" id="N4" />
+
+      <label for="A2">Tráfego Médio:</label>
+      <input type="text" name="A2" id="A2" />
+  
+      <label for="res5">Resultado:</label>
+      <input type="text" name="res5" id="res5" />
+
+      <input type="button" value="Calcular" class="botao" onClick="atrasoMedio(document.calcform.value)"/>
+   </fieldset>
+
+     
+
+
+</form>
+
+
+
+<script type="text/javascript">
+   
+   function erlangB() {
+   var A = document.calcform.A.value;
+   var N = document.calcform.N.value;
+
+   //var res = parseFloat(A) + parseFloat(N);
+   var res = (Math.pow(A,N)/rFact(N))/soma(A,N);
+  
+   document.calcform.res.value = res;
+   
+   }
+
+   function erlangC() {
+      var A1 = document.calcform.A1.value;
+      var N1 = document.calcform.N1.value;
+
+      var res1 = ((Math.pow(A1,N1)/rFact(N1))*((N1)/(N1-A1)))/(soma(A1,N1-1)+(Math.pow(A1,N1)/rFact(N1))*((N1)/(N1-A1)))
+  
+      document.calcform.res1.value = res1;
+   }
+
+   function trafegoUser(){
+      var lambda = document.calcform.lambda.value;
+      var H = document.calcform.H.value;
+
+      var res2 =  lambda*H;
+
+      document.calcform.res2.value = res2;
+   }
+
+   function trafegoCanal(){
+      var Au = document.calcform.Au.value;
+      var U = document.calcform.U.value;
+      var N2 = document.calcform.N2.value;
+
+      var res3 = (U*Au)/N2;
+
+      document.calcform.res3.value = res3;
+   }
+
+   function duracaoChamada(){
+      var Au1 = document.calcform.Au1.value;
+      var lambda1 = document.calcform.lambda1.value;
+
+      var res4 = Au1/lambda1;
+
+      document.calcform.res4.value = res4;
+   }
+
+   function atrasoMedio(){
+      var Pb = document.calcform.Pb.value;
+      var H1 = document.calcform.H1.value;
+      var N4 = document.calcform.N4.value;
+      var A2 = document.calcform.A2.value;
+
+      var res5 = Pb*H1/(N4-A2);
+
+      document.calcform.res5.value = res5;
+   }
+
+   function rFact(num){
+      if (num === 0)
+         { return 1; }
+      else
+         { return num * rFact( num - 1 ); }
+   }
+
+   function soma(A, n){
+      resultado = 0;
+        i = 0;
+        while(i<=n){
+            resultado += Math.pow(A,i)/rFact(i);
+            i++;
+        }
+
+        return resultado;
+   }
+        
+</script>
+
+<body>
+</body>
+</html>
